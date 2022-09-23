@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>BMI Calculator</title>
+        
+        <style>
+            #headstyle{
+                background-color: #3d6d80;
+                color: white;
+                font-family: Garamond, serif;
+                font-size: 25px;
+                /* margin-right: 600px; */
+
+            }
+            #bodystyle{
+                background-color: #8ab6d6;
+                
+                color:#2a2725;
+                font-family: Garamond, serif;
+                font-size: 20px;
+
+            }
+
+            .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            }
+
+            .pstyle{
+                font-size: 25px;
+                /* color: whitesmoke; */
+            }
+
+            /* .backgroundStyle{
+    
+                    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fblue-color&psig=AOvVaw15g_QFBu1xXLEPgEazBqTX&ust=1619005524545000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDitL_jjPACFQAAAAAdAAAAABAU");
+                
+            } */
+        </style>
+        
+        
+
+    </head>
+    <body >
+    
+        <div class="container">
+            <div class="card text-center" style=" width: 70%;">
+                <div class="card-header" id="headstyle" >
+                    <div id="head" ><b>BMI<br></b></div>
+                    
+                </div>
+                <div class="card-body" id="bodystyle" >
+                    <div id="BMI" >
+                        <button id="BMIanswer" type="button" class="btn btn-primary btn-block" >RESULT</button> 
+                    </div>
+
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card text-center" style="margin: 3%; width: 70%;">
+                <div class="card-header" id="headstyle">
+                    
+                    <div id="chead"><b>Normal Calculator<br></b></div>
+                </div>
+                <div class="card-body" id="bodystyle" >
+                
+
+                    <div id="calid">
+                        <button id="Calans" type="button" class="btn btn-primary btn-block" >RESULT</button> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </body>
+</html>
+
+
+<script type="text/babel">
+    class BmiCalc extends React.Component {
+        constructor(props)
+        {
+            super(props);
+            this.state={weight: "", height: "", res:""};
+
+        }
+
+    render() 
+    {
+        return (
+            <div >
+                        
+                <b>Kgs: </b><input onChange={this.read} name="weight" value={this.state.weight}   placeholder="Enter your weight"/><br/><br/>
+                <b>Feet: </b><input onChange={this.read} name="height" value={this.state.height} placeholder="Enter your height"/><br/><br/>
+                <button onClick={this.bmiCalculation}> Click Here! </button><br/><br/><br/>
+                <div class="pstyle">Result: {this.state.res} </div>
+                
+            </div>
+            // <p id="BMIanswer" class="pstyle"></p>
+        );
+    }
+    read = (ele) =>
+    {
+        this.setState({[ele.target.name]: ele.target.value});
+    }
+    bmiCalculation = () => 
+    {
+        let wght=Number(this.state.weight);
+        let hgt=Number(this.state.height);
+        var res=wght/(hgt)
+        this.setState({res:res}) ;
+        // if(result>0)
+        // {
+        //     if(result < 16)
+        //     {
+        //         document.getElementById("BMIanswer").innerHTML = "Under weight: "+result
+        //     }
+
+        //     if(result < 25 && result>16){
+        //         document.getElementById("BMIanswer").innerHTML ="Normal: "+result
+        //     }
+        //     if(result < 30 && result>25){
+        //         document.getElementById("BMIanswer").innerHTML ="Over weighted: "+result
+        //     }
+        //     if (result>30){
+        //         document.getElementById("BMIanswer").innerHTML ="You are obese: "+result
+        //     } 
+        // }
+    }
+}
+    ReactDOM.render(<BmiCalc />, document.getElementById("BMI"));	
+</script>
+
+
+<script type="text/babel">           
+    class Calc extends React.Component {
+        constructor(props)
+        {
+            super(props);
+            this.state={first: "", second: "", res:""};
+        }
+        render() {
+            return (
+                <div >
+                    
+                    <b>First Digit: </b><input onChange={this.fncheck} value={this.state.first} type="number" name="first" placeholder="Enter the First number"/><br/><br/>
+                    <b>Second Digit: </b><input onChange={this.fncheck} value={this.state.second} type="number" name="second"  placeholder="Enter the Second number"/><br/><br/>
+                    <button onClick={this.add}> + </button>
+                    <button onClick={this.sub}> - </button>
+                    <button onClick={this.mul}> * </button>
+                    <button onClick={this.div}> / </button><br/><br/>
+                    
+                     <div class="pstyle">Result : {this.state.res}</div>
+
+                </div>
+                // <p id="Calans" class="pstyle"><b><h1></h1></b></p>
+            );
+        }
+        fncheck=(ele)=>{
+        this.setState({[ele.target.name]:ele.target.value});
+
+        } 
+        
+        add = () =>{
+            let var1=Number(this.state.first);
+            let var2=Number(this.state.second);
+            var res=var1+var2;
+            this.setState({res:res});
+        }
+        sub = () =>{
+            let var1=Number(this.state.first);
+            let var2=Number(this.state.second);
+            var res=var1-var2;
+            this.setState({res:res});
+
+            // let var1 = document.getElementsByName("first")[0].value;
+            // let var2 = document.getElementsByName("second")[0].value;
+            // let sresult=var1-var2;
+            // document.getElementById("Calans").innerHTML = sresult;
+        }
+        mul = () =>{
+            let var1=Number(this.state.first);
+            let var2=Number(this.state.second);
+            var res=var1*var2;
+            this.setState({res:res});
+            // let var1 = document.getElementsByName("first")[0].value;
+            // let var2 = document.getElementsByName("second")[0].value;
+            // let mresult=var1*var2;
+            // document.getElementById("Calans").innerHTML = mresult;
+        }
+        div = () =>{
+            let var1=Number(this.state.first);
+            let var2=Number(this.state.second);
+            var res=var1/var2;
+            this.setState({res:res});
+
+            // let var1 = document.getElementsByName("first")[0].value;
+            // let var2 = document.getElementsByName("second")[0].value;
+            // let dresult=var1/var2;
+            // document.getElementById("Calans").innerHTML = dresult;
+        }
+    }
+    
+    ReactDOM.render(<Calc />, document.getElementById("calid"));	
+</script>

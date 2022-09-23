@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>BMI Calculator</title>
+        
+        <style>
+            #headstyle{
+                background-color: #3d6d80;
+                color: white;
+                font-family: Garamond, serif;
+                font-size: 25px;
+                /* margin-right: 600px; */
+
+            }
+            #bodystyle{
+                background-color: #8ab6d6;
+                
+                color:#2a2725;
+                font-family: Garamond, serif;
+                font-size: 20px;
+
+            }
+
+            .pstyle{
+                font-size: 25px;
+                /* color: whitesmoke; */
+            }
+        </style>
+        
+        
+
+    </head>
+    <body>
+        <div class="card text-center" >
+            <div class="card-header" id="headstyle" ;">
+                <div id="head" style=" text-align: left; padding-left: 400px;"><b>BMI<br></b></div>
+                <div id="chead" style=" text-align: right; padding-right: 400px;"><b>Normal Calculator<br></b></div>
+            </div>
+            <div class="card-body" id="bodystyle" >
+                <div id="BMI" style=" text-align: left; padding-left: 300px; ">
+                    <button id="BMIanswer" type="button" class="btn btn-primary btn-block" >RESULT</button> 
+                </div>
+
+                <div id="calid" style=" text-align: right ;  padding-right: 300px; text-align: top; padding-bottom: 600px;">
+                    <button id="Calans" type="button" class="btn btn-primary btn-block" >RESULT</button> 
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
+
+
+<script type="text/babel">
+    class BmiCalc extends React.Component {
+
+    render() 
+    {
+        return (
+            <div id="button">
+                        
+                <b>Kgs: </b><input type="number" name="weight"    placeholder="Enter your weight"/><br/><br/>
+                <b>Feet: </b><input type="number" name="height"  placeholder="Enter your weight"/><br/><br/>
+                <button onClick={this.bmiCalculation}> Click Here! </button><br/><br/><br/>
+                <p id="BMIanswer" class="pstyle"></p>
+            </div>
+        );
+    }
+    bmiCalculation = () => 
+    {
+        let wght=document.getElementsByName("weight")[0].value;
+        let hgt=document.getElementsByName("height")[0].value;
+        var result=wght/(hgt)
+        if(result>0)
+        {
+            if(result < 16)
+            {
+                document.getElementById("BMIanswer").innerHTML = "Under weight: "+result
+            }
+
+            if(result < 25 && result>16){
+                document.getElementById("BMIanswer").innerHTML ="Normal: "+result
+            }
+            if(result < 30 && result>25){
+                document.getElementById("BMIanswer").innerHTML ="Over weighted: "+result
+            }
+            if (result>30){
+                document.getElementById("BMIanswer").innerHTML ="You are obese: "+result
+            } 
+        }
+    }
+   
+
+}
+    ReactDOM.render(<BmiCalc />, document.getElementById("BMI"));	
+</script>
+
+
+<script type="text/babel">           
+    class Calc extends React.Component {
+        render() {
+            return (
+                <div id="button">
+                    
+                    <b>First Digit: </b><input type="number" name="first" placeholder="Enter the First number"/><br/><br/>
+                    <b>Second Digit: </b><input type="number" name="second"  placeholder="Enter the Second number"/><br/><br/>
+                    <button onClick={this.add}> + </button>
+                    <button onClick={this.sub}> - </button>
+                    <button onClick={this.mul}> * </button>
+                    <button onClick={this.div}> / </button><br/><br/>
+                    
+                    <p id="Calans" class="pstyle"><b><h1></h1></b></p>
+
+                </div>
+            );
+        }
+        
+        add = () =>{
+            let var1 = document.getElementsByName("first")[0].value;
+            let var2 = document.getElementsByName("second")[0].value;
+    
+            document.getElementById("Calans").innerHTML = parseInt(var1)+parseInt(var2);
+        }
+        sub = () =>{
+            let var1 = document.getElementsByName("first")[0].value;
+            let var2 = document.getElementsByName("second")[0].value;
+            let sresult=var1-var2;
+            document.getElementById("Calans").innerHTML = sresult;
+        }
+        mul = () =>{
+            let var1 = document.getElementsByName("first")[0].value;
+            let var2 = document.getElementsByName("second")[0].value;
+            let mresult=var1*var2;
+            document.getElementById("Calans").innerHTML = mresult;
+        }
+        div = () =>{
+            let var1 = document.getElementsByName("first")[0].value;
+            let var2 = document.getElementsByName("second")[0].value;
+            let dresult=var1/var2;
+            document.getElementById("Calans").innerHTML = dresult;
+        }
+    }
+    
+    ReactDOM.render(<Calc />, document.getElementById("calid"));	
+</script>
